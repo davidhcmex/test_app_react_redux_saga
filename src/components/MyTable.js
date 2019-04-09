@@ -62,6 +62,27 @@ class MyTable extends Component {
             <TableDetail />
           </TableBody>
         </Table>
+        <Typography component="h5" variant="p" gutterBottom>
+          This test app has two routes: they were created with React Router 4.
+          Other libraries/technologies used were:
+          <ul>
+            <li>React Material UI</li>
+            <ul>
+              <li>
+                Many Components (such as "Table", "List", "Icons", "Button"),
+                Subcomponents (such as "ListItem","Collapse", "ExpandLess",
+                "ExpandMore"), etc{" "}
+              </li>
+              <li>Redux Selectors</li>
+            </ul>
+            <li>React Map GL (Mapbox)</li>
+            <li>Redux</li>
+            <ul>
+              <li>Redux Saga</li>
+              <li>Redux Selectors</li>
+            </ul>
+          </ul>
+        </Typography>
       </Paper>
     );
   }

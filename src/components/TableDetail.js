@@ -1,10 +1,10 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import TableCell from "@material-ui/core/TableCell";
 import TableRow from "@material-ui/core/TableRow";
 import Button from "@material-ui/core/Button";
 import { withStyles } from "@material-ui/core/styles";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
 
 const styles = theme => ({
   button: {
@@ -46,7 +46,7 @@ class TableDetail extends Component {
   };
 
   render() {
-    const { fetching, data, error, classes } = this.props;
+    const { data, classes } = this.props;
 
     return data ? (
       data.data.map(row => (

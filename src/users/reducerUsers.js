@@ -17,7 +17,6 @@ export function reducerUsers(state = initialState, action) {
     case API_CALL_USERS_REQUEST:
       return { ...state, fetching: true, error: null };
     case API_CALL_USERS_SUCCESS:
-
       return { ...state, fetching: false, data: action.data };
     case API_CALL_USERS_FAILURE:
       return { ...state, fetching: false, data: null, error: action.error };

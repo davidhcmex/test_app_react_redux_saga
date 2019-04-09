@@ -1,12 +1,19 @@
-import { createSelector } from 'reselect';
+import { createSelector } from "reselect";
 
 const itemsSelector = state => {
-    return  state.reducerAlbums.data.data.filter((item) => item.userId === state.reducerUsers.userId);
-}
+  return {
+    data: state.reducerAlbums.data.data,
+    user: state.reducerUsers.userId,
+    maxNumber: state.reducerAlbums.maxNumber
+  };
+};
 
 const filteredAlbums = createSelector(
-    itemsSelector,
-    items => items
-)
+  itemsSelector,
+  items =>
+    items.data.filter(
+      item => item.userId === items.user && item.title.length < items.maxNumber
+    )
+);
 
-export default filteredAlbums
+export default filteredAlbums;

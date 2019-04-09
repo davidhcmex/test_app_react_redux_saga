@@ -7,11 +7,13 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import Collapse from "@material-ui/core/Collapse";
 import DoneIcon from "@material-ui/icons/Done";
+import TouchIcon from "@material-ui/icons/TouchApp";
 import ContactsIcon from "@material-ui/icons/Contacts";
 import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
 import { connect } from "react-redux";
 import filteredAlbums from "../albums/selectorAlbums";
+import Button from "@material-ui/core/Button";
 
 const styles = theme => ({
   root: {
@@ -39,7 +41,7 @@ class DataList extends React.Component {
   };
 
   render() {
-    const { classes, fData, person } = this.props;
+    const { classes, fData, person, setMaxNumber } = this.props;
     return (
       <List component="nav" className={classes.root}>
         <ListItem>
@@ -64,6 +66,27 @@ class DataList extends React.Component {
             primary={person.email}
           />
         </ListItem>
+        <ListItem>
+          <ListItemIcon>
+            <TouchIcon />
+          </ListItemIcon>
+          <Button
+            variant="outlined"
+            onClick={() => setMaxNumber(30)}
+            color="primary"
+            className={classes.button}
+          >
+            {`Letters in Title < 30`}
+          </Button>
+          <Button
+            variant="outlined"
+            onClick={() => setMaxNumber(40)}
+            color="primary"
+            className={classes.button}
+          >
+            {`Letters in Title < 40`}
+          </Button>
+        </ListItem>
         <ListItem button onClick={this.handleClick}>
           <ListItemIcon>
             <ContactsIcon />
@@ -86,12 +109,19 @@ class DataList extends React.Component {
               <ListItem
                 button
                 className={classes.nested}
+                key={index}
                 onClick={() => this.props.updateMap(index)}
               >
                 <ListItemIcon>
                   <DoneIcon />
                 </ListItemIcon>
-                <ListItemText inset primary={elem.title} secondary="Title" />
+                <ListItemText
+                  inset
+                  primary={` ${index + 1}.- ${elem.title},(${
+                    elem.title.length
+                  } letters)`}
+                  secondary="Title"
+                />
               </ListItem>
             ))}
           </List>
@@ -115,7 +145,15 @@ const mapStateToProps = state => {
   };
 };
 
+const mapDispatchToProps = dispatch => {
+  return {
+    setMaxNumber: maxNumber => {
+      return dispatch({ type: "SET_MAX_NUMBER", maxNumber });
+    }
+  };
+};
+
 export default connect(
   mapStateToProps,
-  null
+  mapDispatchToProps
 )(withStyles(styles)(DataList));
