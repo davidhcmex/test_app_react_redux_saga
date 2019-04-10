@@ -45,24 +45,24 @@ class MyTable extends Component {
 
     return (
       <Paper className={classes.root}>
-        <Typography component="h3" variant="h4" gutterBottom>
+        <Typography variant="h4" gutterBottom>
           Persons
         </Typography>
         <Table className={classes.table}>
           <TableHead>
             <TableRow className={classes.head}>
-              <CustomTableCell align="right">Name</CustomTableCell>
-              <CustomTableCell align="right">Username</CustomTableCell>
-              <CustomTableCell align="right">email</CustomTableCell>
-              <CustomTableCell align="right">Phone</CustomTableCell>
-              <CustomTableCell align="right">Location</CustomTableCell>
+              <CustomTableCell align="center">Name</CustomTableCell>
+              <CustomTableCell align="center">Username</CustomTableCell>
+              <CustomTableCell align="center">email</CustomTableCell>
+              <CustomTableCell align="center">Phone</CustomTableCell>
+              <CustomTableCell align="center">Location</CustomTableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             <TableDetail />
           </TableBody>
         </Table>
-        <Typography component="h5" variant="p" gutterBottom>
+        <Typography component="span" variant="body1" gutterBottom>
           This test app has two routes: they were created with React Router 4.
           Other libraries/technologies used were:
           <ul>
@@ -73,7 +73,7 @@ class MyTable extends Component {
                 Subcomponents (such as "ListItem","Collapse", "ExpandLess",
                 "ExpandMore"), etc{" "}
               </li>
-              <li>Redux Selectors</li>
+              <li>Custom Styling</li>
             </ul>
             <li>React Map GL (Mapbox)</li>
             <li>Redux</li>

@@ -9,7 +9,7 @@ const initialState = {
   fetching: false,
   data: null,
   error: null,
-  maxNumber: null
+  maxNumber: 30
 };
 
 export function reducerAlbums(state = initialState, action) {

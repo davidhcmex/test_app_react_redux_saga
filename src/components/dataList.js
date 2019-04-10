@@ -11,9 +11,22 @@ import TouchIcon from "@material-ui/icons/TouchApp";
 import ContactsIcon from "@material-ui/icons/Contacts";
 import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
-import { connect } from "react-redux";
 import filteredAlbums from "../albums/selectorAlbums";
 import Button from "@material-ui/core/Button";
+import { connect } from "react-redux";
+
+const StyledButton = withStyles({
+  root: {
+    background: "lightgray",
+    borderRadius: 3,
+    border: 0,
+    width: "100px",
+    margin: "10px"
+  },
+  label: {
+    textTransform: "none"
+  }
+})(Button);
 
 const styles = theme => ({
   root: {
@@ -25,6 +38,10 @@ const styles = theme => ({
   },
   nested: {
     paddingLeft: theme.spacing.unit * 4
+  },
+  listItem: {
+    margin: "1%",
+    padding: "1%"
   }
 });
 
@@ -40,23 +57,29 @@ class DataList extends React.Component {
     this.setState(state => ({ open: !state.open }));
   };
 
+  processMaxNumber = maxNumber => {
+    const { setMarkerOff, setMaxNumber } = this.props;
+    setMarkerOff();
+    setMaxNumber(maxNumber);
+  };
+
   render() {
-    const { classes, fData, person, setMaxNumber } = this.props;
+    const { classes, fData, person } = this.props;
     return (
       <List component="nav" className={classes.root}>
-        <ListItem>
+        <ListItem className={classes.listItem}>
           <ListItemIcon>
             <ContactsIcon />
           </ListItemIcon>
           <ListItemText inset secondary="Name" primary={person.name} />
         </ListItem>
-        <ListItem>
+        <ListItem className={classes.listItem}>
           <ListItemIcon>
             <ContactsIcon />
           </ListItemIcon>
           <ListItemText inset secondary="User Name" primary={person.username} />
         </ListItem>
-        <ListItem>
+        <ListItem className={classes.listItem}>
           <ListItemIcon>
             <ContactsIcon />
           </ListItemIcon>
@@ -70,22 +93,22 @@ class DataList extends React.Component {
           <ListItemIcon>
             <TouchIcon />
           </ListItemIcon>
-          <Button
+          <StyledButton
             variant="outlined"
-            onClick={() => setMaxNumber(30)}
+            onClick={() => this.processMaxNumber(30)}
             color="primary"
             className={classes.button}
           >
             {`Letters in Title < 30`}
-          </Button>
-          <Button
+          </StyledButton>
+          <StyledButton
             variant="outlined"
-            onClick={() => setMaxNumber(40)}
+            onClick={() => this.processMaxNumber(40)}
             color="primary"
             className={classes.button}
           >
             {`Letters in Title < 40`}
-          </Button>
+          </StyledButton>
         </ListItem>
         <ListItem button onClick={this.handleClick}>
           <ListItemIcon>
@@ -93,7 +116,7 @@ class DataList extends React.Component {
           </ListItemIcon>
           <ListItemText
             inset
-            secondary="see breakdown and click for location"
+            secondary="Click for location"
             primary={`Number of Albums: ${fData.length}`}
           />
           {this.state.open ? <ExpandLess /> : <ExpandMore />}
@@ -110,7 +133,7 @@ class DataList extends React.Component {
                 button
                 className={classes.nested}
                 key={index}
-                onClick={() => this.props.updateMap(index)}
+                onClick={() => this.props.updateMap(elem.id % 10)}
               >
                 <ListItemIcon>
                   <DoneIcon />
@@ -137,7 +160,6 @@ DataList.propTypes = {
 
 //export default withStyles(styles)(DataList);
 const mapStateToProps = state => {
-  console.log(state.reducerUsers);
   return {
     fetching: state.reducerUsers.fetching,
     fData: filteredAlbums(state),

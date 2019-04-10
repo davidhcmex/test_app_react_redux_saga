@@ -51,13 +51,11 @@ class TableDetail extends Component {
     return data ? (
       data.data.map(row => (
         <TableRow key={row.id} className={classes.row}>
-          <TableCell component="th" scope="row">
-            {row.name}
-          </TableCell>
-          <TableCell align="right">{row.username}</TableCell>
-          <TableCell align="right">{row.email}</TableCell>
-          <TableCell align="right">{row.phone}</TableCell>
-          <TableCell align="right">
+          <TableCell align="left">{row.name}</TableCell>
+          <TableCell align="left">{row.username}</TableCell>
+          <TableCell align="left">{row.email}</TableCell>
+          <TableCell align="left">{row.phone}</TableCell>
+          <TableCell align="left">
             <StyledButton>
               <Link to={"/map/" + JSON.stringify(row)}>Location</Link>
             </StyledButton>
