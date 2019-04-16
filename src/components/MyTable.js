@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
@@ -40,8 +41,14 @@ class MyTable extends Component {
     super(props);
     this.state = { props };
   }
+
+  componentDidMount() {
+    this.props.onRequestUsersData();
+    this.props.onRequestAlbumsData();
+  }
+
   render() {
-    const { classes } = this.state.props;
+    const { classes, data } = this.props;
 
     return (
       <Paper className={classes.root}>
@@ -59,7 +66,7 @@ class MyTable extends Component {
             </TableRow>
           </TableHead>
           <TableBody>
-            <TableDetail />
+            <TableDetail data={data} />
           </TableBody>
         </Table>
         <Typography component="span" variant="body1" gutterBottom>
@@ -92,4 +99,22 @@ MyTable.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(MyTable);
+const mapStateToProps = state => {
+  return {
+    fetching: state.reducerUsers.fetching,
+    data: state.reducerUsers.data,
+    error: state.reducerUsers.error
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onRequestUsersData: () => dispatch({ type: "API_CALL_USERS_REQUEST" }),
+    onRequestAlbumsData: () => dispatch({ type: "API_CALL_ALBUMS_REQUEST" })
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withStyles(styles)(MyTable));

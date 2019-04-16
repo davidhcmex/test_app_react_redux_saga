@@ -114,23 +114,23 @@ class MyMap extends Component {
               associated with the person.
             </p>
             <p>
-              One interesting feature in Person Details is the ability to filter
-              the Albums by the maximum number of letters in the corresponding
-              Album Title: that is achieved by pressing the corresponding
-              button, two are provided: one that filters to only the albums with
-              a maximum number of letters in the title less that 30 and the
-              other less than 40. The number of albums adjusts to the filtering
-              option and the expandable list adjusts too.
+              One interesting feature in the "Person Details" list is the
+              ability to filter the Albums by the maximum number of letters in
+              the corresponding Album Title: that is achieved by pressing the
+              corresponding button, two are provided: one that filters to only
+              the albums with a maximum number of letters in the title less that
+              30 and the other less than 40. The number of albums adjusts to the
+              filtering option and the expandable list adjusts too.
             </p>
             <p>
-              The feature described aboove was made possible using an advanced
-              Redux Feature: Selectors
+              The feature described above was made possible using an advanced
+              Redux feature: Selectors
             </p>
             <p>
-              Each album is associated with a location on the map to the rigth.
-              When an Album Title is selected for the expandable list, the
-              location associated with that album, and with that person, is
-              updated on the map
+              Each album is associated with a location on the map to the right.
+              When an Album Title is selected from the sub-list that shows when
+              pressing "Number of Albums", the corresponding location is updated
+              on the map
             </p>
           </Typography>
         </Grid>

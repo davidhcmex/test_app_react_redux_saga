@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import TableCell from "@material-ui/core/TableCell";
 import TableRow from "@material-ui/core/TableRow";
@@ -36,17 +35,13 @@ class TableDetail extends Component {
     super(props);
     this.state = {};
   }
-  componentDidMount() {
-    this.props.onRequestUsersData();
-    this.props.onRequestAlbumsData();
-  }
 
   createSortHandler = property => event => {
     this.props.onRequestSort(event, property);
   };
 
   render() {
-    const { data, classes } = this.props;
+    const { classes, data } = this.props;
 
     return data ? (
       data.data.map(row => (
@@ -69,23 +64,4 @@ class TableDetail extends Component {
     );
   }
 }
-
-const mapStateToProps = state => {
-  return {
-    fetching: state.reducerUsers.fetching,
-    data: state.reducerUsers.data,
-    error: state.reducerUsers.error
-  };
-};
-
-const mapDispatchToProps = dispatch => {
-  return {
-    onRequestUsersData: () => dispatch({ type: "API_CALL_USERS_REQUEST" }),
-    onRequestAlbumsData: () => dispatch({ type: "API_CALL_ALBUMS_REQUEST" })
-  };
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withStyles(styles)(TableDetail));
+export default withStyles(styles)(TableDetail);
